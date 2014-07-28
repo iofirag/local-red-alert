@@ -174,7 +174,7 @@ function pikudHaoref_jsonLoader() {
 					}
 					
 					/* Add alarm line */
-					$("#past_alertsList").prepend("<section class='past_alertItem'>" + past_strToShow + " - " + alertItem.time.timeReceived +"</section>");
+					$("#past_alertsList").prepend("<section class='past_alertItem'>" + alertItem.time.timeReceived + " - " + past_strToShow +"</section>");
 				
 				} else {
 					/* garbich data */
