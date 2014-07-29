@@ -51,7 +51,7 @@ function pikudHaoref_jsonLoader() {
 
 	// 2 - Mako with YQL
 	alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fwww.mako.co.il%2FCollab%2Famudanan%2Fadom.txt%22%20and%20charset%3D'utf-16'&format=json&callback=";
-	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fredalert.eu5.org%2Fnot_use%2Fadom.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
+	alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fredalert.eu5.org%2Fnot_use%2Fadom.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
 	$.ajax({
 		dataType : "json",
 		url : alertFile,
@@ -173,8 +173,9 @@ function pikudHaoref_jsonLoader() {
 						$('#rocketPic').attr("id", "past_alertsList");
 					}
 					
+					item = "<b>"+alertItem.time.timeReceived + "</B> - " + past_strToShow  ;
 					/* Add alarm line */
-					$("#past_alertsList").prepend("<section class='past_alertItem'>" + alertItem.time.timeReceived + " - " + past_strToShow +"</section>");
+					$("#past_alertsList").prepend("<section class='past_alertItem'>" + item + "</section>");
 				
 				} else {
 					/* garbich data */
