@@ -53,3 +53,15 @@
 //						// toggleNav("close");
 //					// }
 //				}
+
+
+
+
+//function savePosition(position){
+//	userLatitude = position.coords.latitude;
+//	userLongitude = position.coords.longitude;
+//	
+//	/*static location for test */
+//	// userLatitude = 31.228281;
+//	// userLongitude = 34.284559;
+//}

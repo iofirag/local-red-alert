@@ -6,6 +6,9 @@ jQuery(document).ready(function($) {
 	getLocation();
 });
 
+window.setInterval(function() {
+	pikudHaoref_jsonLoader();
+}, 60000);
 
 function getLocation() {
 	if (navigator.geolocation) {
@@ -14,14 +17,7 @@ function getLocation() {
 		alert("Geolocation is not supported by this browser.");
 	}
 }
-function savePosition(position){
-	userLatitude = position.coords.latitude;
-	userLongitude = position.coords.longitude;
-	
-	/*static location for test */
-	// userLatitude = 31.228281;
-	// userLongitude = 34.284559;
-}
+
 
 function showPositionCity(position) {
 	userLatitude = position.coords.latitude;
