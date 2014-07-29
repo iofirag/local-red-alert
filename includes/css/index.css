@@ -33,11 +33,10 @@ body {
 
 	/*-webkit-transform: translate3d(0, 0, 0);*/
 	/*transform: translate3d(0, 0, 0);*/
-	
+
 	/* Cubic Bounce */
 	-webkit-transition: all 300ms cubic-bezier(0.32,1.25,0.375,1.15);
 	transition: all 300ms cubic-bezier(0.32,1.25,0.375,1.15);
-	
 	/*-webkit-backface-visibility: hidden;*/
 	/*backface-visibility: hidden;*/
 
@@ -59,27 +58,26 @@ body {
 /*-----------------------------------------*/
 
 #menu_title {
-	margin-top:20px;
+	margin-top: 20px;
 }
-
 
 #wrapper {
 	margin: 0 auto;
 	padding: 0;
 	width: 80%;
 }
-#title_container{
+#title_container {
 	/*padding: 10px 0px 30px 0px;*/
 }
-	#title_top {
-		color: #1189FF;
-		font-size: 40px;
-	}
-	#title_button{
-		color: #80C0FF;
-		font-size: 15px;
-		margin-bottom: 20px;
-	}
+#title_top {
+	color: #1189FF;
+	font-size: 40px;
+}
+#title_button {
+	color: #80C0FF;
+	font-size: 15px;
+	margin-bottom: 20px;
+}
 
 #rocketPic {
 	/*background: url('../images/rocket/1.jpg') no-repeat;*/
@@ -107,34 +105,34 @@ body {
 	background-size: 21px auto;
 	float: left;
 }
-	.connected {
-		/*background: url('../images/led-green-blink.gif') no-repeat;*/
-		width: 85px !important;
-		text-align: center;
-		padding-top: 6px;
-		color: green;
-	}
-	.server_busy {
-		/* background: url('../images/led-red.png') no-repeat; */
-		width: 100px !important;
-		text-align: center;
-		padding-top: 6px;
-		color: orange;
-	}
-	.no_internet {
-		width: 90px !important;
-		text-align: center;
-		padding-top: 6px;
-		color: red;
-	}
-
-#now_alertList{
-	
+.connected {
+	/*background: url('../images/led-green-blink.gif') no-repeat;*/
+	width: 85px !important;
+	text-align: center;
+	padding-top: 6px;
+	color: green;
 }
-	.now_alertItem{
-		margin: 10px 0px 10px 0px;
-		color: white;
-	}
+.server_busy {
+	/* background: url('../images/led-red.png') no-repeat; */
+	width: 100px !important;
+	text-align: center;
+	padding-top: 6px;
+	color: orange;
+}
+.no_internet {
+	width: 90px !important;
+	text-align: center;
+	padding-top: 6px;
+	color: red;
+}
+
+#now_alertList {
+
+}
+.now_alertItem {
+	margin: 10px 0px 10px 0px;
+	color: white;
+}
 
 #past_alertsList {
 	background-color: white;
@@ -146,10 +144,10 @@ body {
 	text-align: right;
 	direction: rtl;
 }
-	.past_alertItem{
-		margin: 10px 0px 10px 0px;
-		color: #FF3911;
-	}
+.past_alertItem {
+	margin: 10px 0px 10px 0px;
+	color: #FF3911;
+}
 
 #rights {
 	margin: 20px auto 10px auto;
@@ -165,8 +163,11 @@ body {
 @media only screen and (min-width: 769px) {/*Desktop*/
 	/* facebook buttons */
 	#facebook_buttons {
-		float: right;
-		padding-right: 20px;
+		/*float: right;*/
+		/*padding-right: 20px;*/
+		position: absolute;
+		top: 35px;
+		left: 50px;
 	}
 }
 
