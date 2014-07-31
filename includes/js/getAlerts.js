@@ -163,7 +163,11 @@ function pikudHaoref_jsonLoader() {
 						if (timeToShow_higher< areaObj.timeToShow)
 							timeToShow_higher= areaObj.timeToShow;
 					};
-					setTimeout(function() { toggleNav("close"); }, timeToShow_higher*1000);
+					setTimeout(function() {
+							toggleNav("close");
+							$(".past_alertItem").first().css("background-color","");
+						}, 
+					timeToShow_higher*1000);
 		
 
 					/* if this is the first alarm item we adding -remove the bomb picture */
@@ -175,7 +179,7 @@ function pikudHaoref_jsonLoader() {
 					
 					item = "<b>"+alertItem.time.timeReceived + "</B> - " + past_strToShow  ;
 					/* Add alarm line */
-					$("#past_alertsList").prepend("<section class='past_alertItem'>" + item + "</section>");
+					$("#past_alertsList").prepend("<section class='past_alertItem' style='background-color: black;'>" + item + "</section>");
 				
 				} else {
 					/* garbich data */
