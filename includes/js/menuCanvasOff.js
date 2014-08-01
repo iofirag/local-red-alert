@@ -9,7 +9,7 @@
 // });
 
 var navOpen = false;
-function toggleNav(make) {
+function toggleNav(make, nearUser) {
 	if (make=="close"){
     	if (navOpen==true){
 	        // Do things on Nav Close
@@ -24,6 +24,13 @@ function toggleNav(make) {
     } else if (make =="open") {
         // Do things on Nav Open
         $('#site-wrapper').addClass('show-nav');
+        
+        if (nearUser==true){ 
+        	$('#site-menu').css('background-color', '#FF0000');
+        }
+        else{
+        	$('#site-menu').css('background-color', 'orange');
+        }
         
 		 var calculateHeight = (alertItem.areaList.length*30)+80;
 		 $("#site-canvas").css('-webkit-transform', "translate3d(0, "+calculateHeight+"px, 0)");

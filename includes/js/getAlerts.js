@@ -2,6 +2,8 @@ var alertItem;
 var database = [];
 var alertNoise = "<audio autoplay><source src='includes/noise/alarm.mp3'><source src='includes/noise/alarm.ogg'></audio>";
 var geocoder;
+var popupRedW = 700;
+var popupRedH = 500;
 
 $(window).load(function() {
 	rocketPic_randomImage();
@@ -44,20 +46,21 @@ function pikudHaoref_jsonLoader() {
 	*
 	* YQL +(1):   https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fwww.oref.org.il%2FWarningMessages%2Falerts.json%22%20and%20charset%3D'utf-16'&format=json&callback=
 	* YQL +(2):   https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fwww.mako.co.il%2FCollab%2Famudanan%2Fadom.txt%22%20and%20charset%3D'utf-16'&format=json&callback=
-	* YQL +(3):   https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%27http%3A%2F%2Fredalert.eu5.org%2Fnot_use%2Fadom.txt%27%20and%20charset%3D%27utf-16%27&format=json&callback
-	* YQL +(4):   https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fredalert.eu5.org%2Fnot_use%2FadomAlert.txt'%20and%20charset%3D'utf-16'&format=json&callback=
+	* YQL +(3):   https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2Fadom.txt'%20and%20charset%3D'utf-16'&format=json&callback=
+	* YQL +(4):   https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2FadomAlert.txt'%20and%20charset%3D'utf-16'&format=json&callback=
 	* YQL error:   https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fredalert.eu5.org%2Fnot_use%2FadomAlert.txt'%20and%20charset%3D'utf-16'&format=json&callback=
 	*************************************************************************************************************************************************************************************************************************/
 
 	// 2 - Mako with YQL
 	alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fwww.mako.co.il%2FCollab%2Famudanan%2Fadom.txt%22%20and%20charset%3D'utf-16'&format=json&callback=";
-	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fredalert.eu5.org%2Fnot_use%2FadomAlert.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
+	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2Fadom.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
+	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2FadomAlert.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
 	$.ajax({
 		dataType : "json",
 		url : alertFile,
 		type : 'GET',
 		success : function(res) {
-			debugger;
+			//debugger;
 			if (res.query.results != null) {
 				var allp = res.query.results.body.p;
 				connectionGoodResult();
@@ -154,23 +157,13 @@ function pikudHaoref_jsonLoader() {
 								alarm.play();
 
 								/* Open window alarm */
-								//popupwindow('http://iofirag.github.io/personal-red-alert/red.html', 'Red-Alert in your location', 700, 500);
-								var left = (screen.width / 2) - (w / 2);
-								var top = (screen.height / 2) - (h / 2);
-								var popupRed = window.open('http://iofirag.github.io/personal-red-alert/red.html', '1406884589039',            'width='+700+', height='+500+', top='+top+', left='+left ,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0');
-								//var popupRed = window.open('http://iofirag.github.io/personal-red-alert/red.html', 'Red-Alert in your location', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' + 700 + ', height=' + 500 + ', top=' + top + ', left=' + left);
+								var left = (screen.width / 2) - (popupRedW / 2);
+								var top = (screen.height / 2) - (popupRedH / 2);
+								console.log(left +" "+top);
+								var popupRed = window.open('http://iofirag.github.io/personal-red-alert/red.html', 'Red-Alert in your location',            'width='+popupRedW+', height='+popupRedH+', top='+top+', left='+left+ ',toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1');
 								setTimeout(function() {
 									popupRed.close();
 								}, timeToShow_higher*1000);
-
-								
-								// $.ajax({
-								  // url: 'ajax/test.html',
-								  // success: function(data) {
-								    // $('.result').html(data);
-								    // alert('Load was performed.');
-								  // }
-								// });
 								break;
 							}
 						}
@@ -180,7 +173,7 @@ function pikudHaoref_jsonLoader() {
 
 					/* Decleare dynamic height for top menu */
 					/* toggle top menu */
-					toggleNav("open");
+					toggleNav("open",nearUser);
 
 					/* put data on top menu */
 					$("#now_alertList").html("<section class='now_alertItem'>" + now_strToShow + "</section>");

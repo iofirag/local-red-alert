@@ -51,10 +51,11 @@ body {
 	height: 300px;
 	position: absolute;
 	top: -300px;
-	background: #FF0000;
+	/*background-color: #FF0000;*/
 	/*padding: 15px;*/
 	font-size: 30px;
 }
+
 /*-----------------------------------------*/
 
 #menu_title {
@@ -162,6 +163,8 @@ body {
 	padding: 0;
 	background-color: red;
 	height: 500px;
+	color: white;
+	font-family: 'Happy Monkey', cursive;
 }
 #red_page_title {
 	text-align: center;
