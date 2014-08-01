@@ -51,7 +51,7 @@ function pikudHaoref_jsonLoader() {
 
 	// 2 - Mako with YQL
 	alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fwww.mako.co.il%2FCollab%2Famudanan%2Fadom.txt%22%20and%20charset%3D'utf-16'&format=json&callback=";
-	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fredalert.eu5.org%2Fnot_use%2Fadom.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
+	alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fredalert.eu5.org%2Fnot_use%2Fadom.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
 	$.ajax({
 		dataType : "json",
 		url : alertFile,
@@ -117,15 +117,15 @@ function pikudHaoref_jsonLoader() {
 
 					/* show alert with html */
 					var now_strToShow = "<ul>";
-					var past_strToShow ="";
+					var past_strToShow = "";
 					for ( n = 0; n < alertItem.areaList.length; n++) {
-						
+
 						/* if not last area in array */
-						if (n != alertItem.areaList.length - 1){
-							now_strToShow += "<li>"+alertItem.areaList[n].areaName + " " + alertItem.areaList[n].areaNumber + "</li>";
+						if (n != alertItem.areaList.length - 1) {
+							now_strToShow += "<li>" + alertItem.areaList[n].areaName + " " + alertItem.areaList[n].areaNumber + "</li>";
 							past_strToShow += alertItem.areaList[n].areaName + " " + alertItem.areaList[n].areaNumber + ",   ";
-						} else{
-							now_strToShow += "<li>"+alertItem.areaList[n].areaName + " " + alertItem.areaList[n].areaNumber + "</li></ul>";
+						} else {
+							now_strToShow += "<li>" + alertItem.areaList[n].areaName + " " + alertItem.areaList[n].areaNumber + "</li></ul>";
 							past_strToShow += alertItem.areaList[n].areaName + " " + alertItem.areaList[n].areaNumber;
 						}
 					}
@@ -135,7 +135,7 @@ function pikudHaoref_jsonLoader() {
 					for (var i = 0; i < alertItem.areaList.length; i++) {
 						for (var j = 0; j < alertItem.areaList[i].placeList.length; j++) {
 							KmDistanceBetweenTwoLatLon = getDistanceFromLatLonInKm(userLatitude, userLongitude, alertItem.areaList[i].placeList[j].placeLatitude, alertItem.areaList[i].placeList[j].placeLongitude);
-							
+
 							/* play alarm - if user in range of one of the alarms area */
 							if (KmDistanceBetweenTwoLatLon <= 5) {
 								nearUser = true;
@@ -149,26 +149,24 @@ function pikudHaoref_jsonLoader() {
 						if (nearUser == true)
 							break;
 					}
-					
+
 					/* Decleare dynamic height for top menu */
 					/* toggle top menu */
-					toggleNav("open"); 
-					
+					toggleNav("open");
+
 					/* put data on top menu */
 					$("#now_alertList").html("<section class='now_alertItem'>" + now_strToShow + "</section>");
-					
+
 					/* open menu for the higher time to show area */
 					var timeToShow_higher = 0;
-					for (i=0; i<alertItem.areaList.length; i++ ){
-						if (timeToShow_higher< areaObj.timeToShow)
-							timeToShow_higher= areaObj.timeToShow;
+					for ( i = 0; i < alertItem.areaList.length; i++) {
+						if (timeToShow_higher < areaObj.timeToShow)
+							timeToShow_higher = areaObj.timeToShow;
 					};
 					setTimeout(function() {
-							toggleNav("close");
-							$(".past_alertItem").first().css("background-color","");
-						}, 
-					timeToShow_higher*1000);
-		
+						toggleNav("close");
+						$(".past_alertItem").css("background-color", "");
+					}, timeToShow_higher * 1000);
 
 					/* if this is the first alarm item we adding -remove the bomb picture */
 					if ($('#rocketPic').length > 0) {
@@ -176,11 +174,11 @@ function pikudHaoref_jsonLoader() {
 						//clear the inline style add in the random image
 						$('#rocketPic').attr("id", "past_alertsList");
 					}
-					
-					item = "<b>"+alertItem.time.timeReceived + "</B> - " + past_strToShow  ;
+
+					item = "<b>" + alertItem.time.timeReceived + "</B> - " + past_strToShow;
 					/* Add alarm line */
 					$("#past_alertsList").prepend("<section class='past_alertItem' style='background-color: black;'>" + item + "</section>");
-				
+
 				} else {
 					/* garbich data */
 				}
@@ -256,6 +254,7 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
 	// Distance in km
 	return d;
 }
+
 function deg2rad(deg) {
 	return deg * (Math.PI / 180);
 }
