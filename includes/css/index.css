@@ -156,6 +156,18 @@ body {
 	 width: 80%;*/
 	color: #80C0FF;
 }
+
+#wrapper_red {
+	margin: 0 auto;
+	padding: 0;
+	background-color: red;
+	height: 500px;
+}
+#red_page_title {
+	text-align: center;
+	font-size: 200px;
+}
+
 .clear {
 	clear: both;
 }

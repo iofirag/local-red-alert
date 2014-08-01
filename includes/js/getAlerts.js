@@ -51,7 +51,7 @@ function pikudHaoref_jsonLoader() {
 
 	// 2 - Mako with YQL
 	alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fwww.mako.co.il%2FCollab%2Famudanan%2Fadom.txt%22%20and%20charset%3D'utf-16'&format=json&callback=";
-	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fredalert.eu5.org%2Fnot_use%2Fadom.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
+	alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fredalert.eu5.org%2Fnot_use%2FadomAlert.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
 	$.ajax({
 		dataType : "json",
 		url : alertFile,
@@ -130,6 +130,13 @@ function pikudHaoref_jsonLoader() {
 						}
 					}
 
+					/* open menu for the higher time to show area */
+					var timeToShow_higher = 0;
+					for ( i = 0; i < alertItem.areaList.length; i++) {
+						if (timeToShow_higher < areaObj.timeToShow)
+							timeToShow_higher = areaObj.timeToShow;
+					};
+
 					/* check if there is a place with alarm near the user */
 					var nearUser = false;
 					for (var i = 0; i < alertItem.areaList.length; i++) {
@@ -139,10 +146,19 @@ function pikudHaoref_jsonLoader() {
 							/* play alarm - if user in range of one of the alarms area */
 							if (KmDistanceBetweenTwoLatLon <= 5) {
 								nearUser = true;
+
+								/* Play alarm sound */
 								var alarm = new Audio("includes/noise/alarm.mp3");
 								if (alarm == null)
 									alarm = new Audio("includes/noise/alarm.ogg");
 								alarm.play();
+
+								/* Open window alarm */
+								//event.preventDefault();
+								var popupRed = window.open('http://iofirag.github.io/personal-red-alert/red.html', '1406884589039', 'width=700,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0');
+								setTimeout(function() {
+									popupRed.close()
+								}, timeToShow_higher*1000);
 								break;
 							}
 						}
@@ -157,12 +173,7 @@ function pikudHaoref_jsonLoader() {
 					/* put data on top menu */
 					$("#now_alertList").html("<section class='now_alertItem'>" + now_strToShow + "</section>");
 
-					/* open menu for the higher time to show area */
-					var timeToShow_higher = 0;
-					for ( i = 0; i < alertItem.areaList.length; i++) {
-						if (timeToShow_higher < areaObj.timeToShow)
-							timeToShow_higher = areaObj.timeToShow;
-					};
+					
 					setTimeout(function() {
 						toggleNav("close");
 						$(".past_alertItem").css("background-color", "");
