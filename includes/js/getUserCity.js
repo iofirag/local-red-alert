@@ -62,6 +62,7 @@ function showPositionCity(position) {
 				}
 			}
 			console.log(userCity);
+			userCity = "r";
 			alert("Your location is: "+userCity);
 			$(".right_part").eq(1).html(userCity);		// or -  $(".right_part:eq(1)").eq(1).html(userCity);		
 		},
