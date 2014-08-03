@@ -11,11 +11,12 @@ $(window).load(function() {
 	readFromDatabase();
 	geocoder = new google.maps.Geocoder();
 	
-	//pikudHaoref_jsonLoader();
+	pikudHaoref_jsonLoader();
 	window.setInterval(function() {
 		pikudHaoref_jsonLoader();
 	}, 5000);
 });
+
 function readFromDatabase() {
 	$.getJSON('includes/js/database.json', function(data) {
 		for (i in data) {

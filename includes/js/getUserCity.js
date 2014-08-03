@@ -3,12 +3,15 @@ var userLongitude;
 var userCity;
 
 jQuery(document).ready(function($) {
+	//$("#user_data").html("us");
+	
 	getLocation();
+	window.setInterval(function() {
+		getLocation();
+	}, 60000);
 });
 
-window.setInterval(function() {
-	pikudHaoref_jsonLoader();
-}, 60000);
+
 
 function getLocation() {
 	if (navigator.geolocation) {
