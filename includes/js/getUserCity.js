@@ -50,7 +50,6 @@ function showPositionCity(position) {
 				for (var i=0; i<res.results[0].address_components.length; i++){
 					if (res.results[0].address_components[i].types[0] == "locality"){
 						userCity = res.results[0].address_components[i].long_name;	
-						alert("A- Your location is: "+userCity);
 						break;	
 					}
 				}
@@ -60,10 +59,10 @@ function showPositionCity(position) {
 					address = address.split(",");	//split all address string by "," delimiter
 					cityWithSpace = address[1];		//get array[1]
 					userCity = cityWithSpace.substring(1);	//remove the space
-					alert("B- Your location is: "+userCity);
 				}
 			}
-			console.log(userCity);
+			//console.log(userCity);
+			$("#user_data").html(userCity);
 			//alert("Your location is: "+userCity);
 			$(".right_part").eq(1).html(userCity);		// or -  $(".right_part:eq(1)").eq(1).html(userCity);		
 		},
