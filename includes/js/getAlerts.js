@@ -22,7 +22,7 @@ function readFromDatabase() {
 
 window.setInterval(function() {
 	pikudHaoref_jsonLoader();
-}, 8000);
+}, 6000);
 
 function rocketPic_randomImage() {
 	var random = getRandomInt(1, 7);
