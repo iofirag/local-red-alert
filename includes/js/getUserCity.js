@@ -3,8 +3,6 @@ var userLongitude;
 var userCity;
 
 jQuery(document).ready(function($) {
-	$("#user_data").html("us");
-	
 	getLocation();
 	window.setInterval(function() {
 		getLocation();
@@ -15,6 +13,7 @@ jQuery(document).ready(function($) {
 
 function getLocation() {
 	if (navigator.geolocation) {
+		$("#user_data").html("us");
 		navigator.geolocation.getCurrentPosition(showPositionCity);
 	} else {
 		alert("Geolocation is not supported by this browser.");
