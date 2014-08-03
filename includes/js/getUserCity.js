@@ -3,7 +3,7 @@ var userLongitude;
 var userCity;
 
 jQuery(document).ready(function($) {
-	//$("#user_data").html("us");
+	$("#user_data").html("us");
 	
 	getLocation();
 	window.setInterval(function() {
