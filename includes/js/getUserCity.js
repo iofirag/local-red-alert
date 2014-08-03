@@ -53,8 +53,16 @@ function showPositionCity(position) {
 						break;	
 					}
 				}
+				
+				if (userCity==null){
+					address = res.results.formatted_address;	// get key "formatted_address"
+					address = address.split(",");	//split all address string by "," delimiter
+					cityWithSpace = address[1];		//get array[1]
+					userCity = cityWithSpace.substring(1);	//remove the space
+				}
 			}
 			console.log(userCity);
+			alert("Your location is: "+userCity);
 			$(".right_part").eq(1).html(userCity);		// or -  $(".right_part:eq(1)").eq(1).html(userCity);		
 		},
 		error : function(res, error) {
