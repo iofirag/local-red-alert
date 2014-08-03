@@ -14,7 +14,6 @@ jQuery(document).ready(function($) {
 function getLocation() {
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(showPositionCity);
-		// $(".right_part").eq(1).html("123456");
 	} else {
 		alert("Geolocation is not supported by this browser.");
 	}
@@ -57,10 +56,8 @@ function showPositionCity(position) {
 						userCity = cityWithSpace.substring(1);	//remove the space
 					}
 				}
-				//console.log(userCity);
-				//$("#user_data").html(userCity);
-				//alert("Your location is: "+userCity);
-				$(".right_part").eq(1).html(userLatitude+"");		// or -  $(".right_part:eq(1)").html(userCity);		
+				console.log(userCity);
+				$(".right_part").eq(1).html(userCity);		// or -  $(".right_part:eq(1)").html(userCity);		
 			},
 			error : function(res, error) {
 				console.log(arguments);
