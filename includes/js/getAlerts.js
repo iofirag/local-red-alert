@@ -10,7 +10,11 @@ $(window).load(function() {
 	rocketPic_randomImage();
 	readFromDatabase();
 	geocoder = new google.maps.Geocoder();
-	pikudHaoref_jsonLoader();
+	
+	//pikudHaoref_jsonLoader();
+	window.setInterval(function() {
+		pikudHaoref_jsonLoader();
+}, 6000);
 });
 function readFromDatabase() {
 	$.getJSON('includes/js/database.json', function(data) {
@@ -20,9 +24,7 @@ function readFromDatabase() {
 	});
 }
 
-window.setInterval(function() {
-	pikudHaoref_jsonLoader();
-}, 6000);
+
 
 function rocketPic_randomImage() {
 	var random = getRandomInt(1, 7);
@@ -113,7 +115,6 @@ function pikudHaoref_jsonLoader() {
 					}
 				}
 
-				//debugger;
 				/* if this is the first object
 				 * or if there is areas +and+ ID not equeal to the last ID */
 				if ((areas.length > 0) && ((alertItem == null) || ((currAlertId != alertItem.alertId) && (areas.length > 0)))) {
@@ -177,7 +178,7 @@ function pikudHaoref_jsonLoader() {
 
 					/* Decleare dynamic height for top menu */
 					/* toggle top menu */
-					toggleNav("close");
+					//toggleNav("close");
 					toggleNav("open",nearUser);
 
 					/* put data on top menu */
