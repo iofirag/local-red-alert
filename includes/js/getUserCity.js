@@ -59,7 +59,7 @@ function showPositionCity(position) {
 			//console.log(userCity);
 			//$("#user_data").html(userCity);
 			//alert("Your location is: "+userCity);
-			$(".right_part").eq(1).html(res.results.formatted_address);		// or -  $(".right_part:eq(1)").html(userCity);		
+			$(".right_part").eq(1).html(userLatitude+" "+userLongitude);		// or -  $(".right_part:eq(1)").html(userCity);		
 		},
 		error : function(res, error) {
 			console.log(arguments);
