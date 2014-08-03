@@ -144,14 +144,14 @@ function pikudHaoref_jsonLoader() {
 					}
 
 					/* check if there is a place with alarm near the user */
-					var nearUser = false;
+					var nearUser = 1;
 					for (var i = 0; i < alertItem.areaList.length; i++) {
 						for (var j = 0; j < alertItem.areaList[i].placeList.length; j++) {
 							KmDistanceBetweenTwoLatLon = getDistanceFromLatLonInKm(userLatitude, userLongitude, alertItem.areaList[i].placeList[j].placeLatitude, alertItem.areaList[i].placeList[j].placeLongitude);
 
 							/* play alarm - if user in range of one of the alarms area */
 							if (KmDistanceBetweenTwoLatLon <= 5) {
-								nearUser = true;
+								nearUser = 2;
 
 								/* Play alarm sound */
 								var alarm = new Audio("includes/noise/alarm.mp3");
@@ -170,7 +170,7 @@ function pikudHaoref_jsonLoader() {
 								break;
 							}
 						}
-						if (nearUser == true)
+						if (nearUser == 2)
 							break;
 					}
 
@@ -203,10 +203,16 @@ function pikudHaoref_jsonLoader() {
 					}
 
 					item = "<b>" + alertItem.time.timeReceived + "</B> - " + past_strToShow;
+					
+					/* get the number of child of #past_alertsList and calculate dynamic height to set */
+					// console.log( $("#past_alertsList").length );
+					//$("#past_alertsList").css("height",  );
+					
 					/* Add alarm line */
 					$("#past_alertsList").prepend("<section class='past_alertItem' style='background-color: black;'>" + item + "</section>");
 
 				} else {
+					toggleNav("open",0);
 					/* garbich data */
 				}
 
