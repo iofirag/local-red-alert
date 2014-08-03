@@ -10,6 +10,8 @@
 var navOpen = false;
 function toggleNav(make, nearUser) {
 	if (make == "close") {
+			$('#now_alertList').html("");
+		
 		if (navOpen == true) {
 			// Do things on Nav Close
 			$('#site-wrapper').removeClass('show-nav');
@@ -31,6 +33,8 @@ function toggleNav(make, nearUser) {
 		switch (nearUser) {
 			case 0:	/* Green = 0 */
 				$('#menu_title').html("אין אזעקות כרגע");
+				$('#now_alertList').html("");
+				
 				$('#site-menu').css('background-color', '#2CD202');
 				calculateHeight =  70;
 				$("#site-canvas").css('-webkit-transform', "translate3d(0, " + calculateHeight + "px, 0)");
