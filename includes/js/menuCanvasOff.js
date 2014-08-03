@@ -32,16 +32,19 @@ function toggleNav(make, nearUser) {
 		
 		switch (nearUser) {
 			case 0:	/* Green = 0 */
-				$('#menu_title').html("אין אזעקות כרגע");
-				$('#now_alertList').html("");
-				
-				$('#site-menu').css('background-color', '#2CD202');
-				calculateHeight =  70;
-				$("#site-canvas").css('-webkit-transform', "translate3d(0, " + calculateHeight + "px, 0)");
-				$("#site-canvas").css('transform', "translate3d(0, " + calculateHeight + "px, 0)");
-				$("#site-menu").css("height", calculateHeight);
-				$("#site-menu").css("top", -calculateHeight);
-				navOpen = true;
+				/* Can open green nav just if it close */ 
+				if (navOpen==false){
+					$('#menu_title').html("אין אזעקות כרגע");
+					$('#now_alertList').html("");
+					
+					$('#site-menu').css('background-color', '#2CD202');
+					calculateHeight =  70;
+					$("#site-canvas").css('-webkit-transform', "translate3d(0, " + calculateHeight + "px, 0)");
+					$("#site-canvas").css('transform', "translate3d(0, " + calculateHeight + "px, 0)");
+					$("#site-menu").css("height", calculateHeight);
+					$("#site-menu").css("top", -calculateHeight);
+					navOpen = true;
+				}
 				break;
 			case 1:	/* Orange = 1 */
 				$('#menu_title').html(":אזעקות כרגע");

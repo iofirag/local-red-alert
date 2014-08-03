@@ -54,7 +54,7 @@ function pikudHaoref_jsonLoader() {
 
 	// 2 - Mako with YQL
 	alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fwww.mako.co.il%2FCollab%2Famudanan%2Fadom.txt%22%20and%20charset%3D'utf-16'&format=json&callback=";
-	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2Fadom.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
+	alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2Fadom.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
 	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2FadomAlert.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
 	$.ajax({
 		dataType : "json",
@@ -113,6 +113,7 @@ function pikudHaoref_jsonLoader() {
 					}
 				}
 
+				//debugger;
 				/* if this is the first object
 				 * or if there is areas +and+ ID not equeal to the last ID */
 				if ((areas.length > 0) && ((alertItem == null) || ((currAlertId != alertItem.alertId) && (areas.length > 0)))) {
@@ -176,7 +177,7 @@ function pikudHaoref_jsonLoader() {
 
 					/* Decleare dynamic height for top menu */
 					/* toggle top menu */
-					//toggleNav("close",0);
+					toggleNav("close");
 					toggleNav("open",nearUser);
 
 					/* put data on top menu */
@@ -216,6 +217,7 @@ function pikudHaoref_jsonLoader() {
 
 				} else {
 					/* garbich data */
+					toggleNav("open",0);
 				}
 
 				//init areas
