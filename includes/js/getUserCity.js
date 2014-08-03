@@ -38,14 +38,6 @@ function showPositionCity(position) {
 			//console.log(res.results[0].formatted_address);
 			
 			/* Way A */
-			// if (res.results.length>0){
-				// address = res.results.formatted_address;	// get key "formatted_address"
-				// address = address.split(",");	//split all address string by "," delimiter
-				// cityWithSpace = address[1];		//get array[1]
-				// userCity = cityWithSpace.substring(1);	//remove the space
-			// }
-			
-			/* Way B */
 			if (res.results.length>0){
 				for (var i=0; i<res.results[0].address_components.length; i++){
 					if (res.results[0].address_components[i].types[0] == "locality"){
@@ -55,6 +47,7 @@ function showPositionCity(position) {
 				}
 				
 				if (userCity==null){
+					/* Way B */
 					address = res.results.formatted_address;	// get key "formatted_address"
 					address = address.split(",");	//split all address string by "," delimiter
 					cityWithSpace = address[1];		//get array[1]
@@ -62,7 +55,7 @@ function showPositionCity(position) {
 				}
 			}
 			//console.log(userCity);
-			$("#user_data").html(userCity);
+			//$("#user_data").html(userCity);
 			//alert("Your location is: "+userCity);
 			$(".right_part").eq(1).html(userCity);		// or -  $(".right_part:eq(1)").eq(1).html(userCity);		
 		},
