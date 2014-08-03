@@ -89,41 +89,47 @@ body {
 	background-size: 100% !important;
 }
 
+#user_data {
+	display: inline-block;
+}
+
 #connection {
-	margin-bottom: 10px auto;
+	/*margin-bottom: 10px auto;*/
 	/*width:100% auto;*/
 	display: inline-block;
 }
-#connection_string {
+.left_part {
 	margin-right: 10px;
 	font-size: 24px;
 	float: left;
 }
-#connection_icon {
-	width: 26px;
+.right_part{
+	/*width: 26px;*/
 	height: 26px;
 	background-position: 0px 5px;
 	background-size: 21px auto;
 	float: left;
+	text-align: center;
+	padding-top: 7px;
 }
-.connected {
+#connected {
 	/*background: url('../images/led-green-blink.gif') no-repeat;*/
 	width: 85px !important;
-	text-align: center;
-	padding-top: 6px;
+	/*text-align: center;*/
+	/*padding-top: 6px;*/
 	color: green;
 }
-.server_busy {
+#server_busy {
 	/* background: url('../images/led-red.png') no-repeat; */
 	width: 100px !important;
-	text-align: center;
-	padding-top: 6px;
+	/*text-align: center;*/
+	/*padding-top: 6px;*/
 	color: orange;
 }
-.no_internet {
+#no_internet {
 	width: 90px !important;
-	text-align: center;
-	padding-top: 6px;
+	/*text-align: center;*/
+	/*padding-top: 6px;*/
 	color: red;
 }
 
@@ -140,10 +146,13 @@ body {
 	-moz-border-radius: 15px;
 	-webkit-border-radius: 15px;
 	border-radius: 15px;
-	padding: 2px 10px 2px 10px;
+	padding: 2px 25px 2px 10px;
 	font-size: 25px;
 	text-align: right;
 	direction: rtl;
+	height: 400px;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 .past_alertItem {
 	margin: 10px 0px 10px 0px;
@@ -190,11 +199,11 @@ body {
 	#title {
 		font-size: 40px;
 	}
-	#connection_string {
+	#left_part {
 		margin-right: 10px;
 		font-size: 24px;
 	}
-	#connection_icon {
+	#right_part {
 		width: 26px;
 		height: 26px;
 		background-position: 0px 5px;
@@ -203,17 +212,20 @@ body {
 	#rocketPic {
 		height: 450px;
 	}
+	/*#past_alertsList {
+		height: 100px;
+	}*/
 }
 
 @media only screen and (max-width: 365px) {/*mobile*/
 	#title {
 		font-size: 35px;
 	}
-	#connection_string {
+	#left_part {
 		margin-right: 8px;
 		font-size: 20px;
 	}
-	#connection_icon {
+	#right_part {
 		width: 20px;
 		height: 26px;
 		background-position: 0px 4px;
@@ -222,5 +234,8 @@ body {
 	#rocketPic {
 		height: 300px;
 	}
+	/*#past_alertsList {
+		height: 100px;
+	}*/
 }
 

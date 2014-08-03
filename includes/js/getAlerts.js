@@ -4,6 +4,7 @@ var alertNoise = "<audio autoplay><source src='includes/noise/alarm.mp3'><source
 var geocoder;
 var popupRedW = 700;
 var popupRedH = 500;
+var lastDay;
 
 $(window).load(function() {
 	rocketPic_randomImage();
@@ -121,6 +122,8 @@ function pikudHaoref_jsonLoader() {
 					/* show alert with html */
 					var now_strToShow = "<ul>";
 					var past_strToShow = "";
+					
+					/* Run on area list */
 					for ( n = 0; n < alertItem.areaList.length; n++) {
 
 						/* if not last area in array */
@@ -185,9 +188,18 @@ function pikudHaoref_jsonLoader() {
 
 					/* if this is the first alarm item we adding -remove the bomb picture */
 					if ($('#rocketPic').length > 0) {
+						/* Put value for lastDay variable */
+						lastDay = new Date().getDay();
+						
 						$('#rocketPic').attr("style", "");
 						//clear the inline style add in the random image
 						$('#rocketPic').attr("id", "past_alertsList");
+					}else {
+						/* Check if this is a new day */
+						currDay = new Date().getDay();
+						if ( (lastDay==null || lastDay=="") && lastDay!= currDay){
+							$("#past_alertsList").prepend("<hr>");
+						}
 					}
 
 					item = "<b>" + alertItem.time.timeReceived + "</B> - " + past_strToShow;
@@ -217,19 +229,19 @@ function popupwindow(url, title, w, h) {
 }
 
 function connectionGoodResult() {
-	$('#connection_icon').attr("class", "connected");
-	$('#connection_icon').html("listening...");
+	$('.right_part').eq(0).attr("id", "connected");
+	$('.right_part').eq(0).html("listening...");
 }
 
 function connectionBadResult() {
-	$('#connection_icon').attr("class", "server_busy");
-	$('#connection_icon').html("server busy");
+	$('.right_part').eq(0).attr("id", "server_busy");
+	$('.right_part').eq(0).html("server busy");
 	console.log("Server is busy.");
 }
 
 function internetConnectionError() {
-	$('#connection_icon').attr("class", "no_internet");
-	$('#connection_icon').html("No internet");
+	$('.right_part').eq(0).attr("id", "no_internet");
+	$('.right_part').eq(0).html("No internet");
 	console.log("No internet conncection.");
 }
 

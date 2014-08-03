@@ -55,8 +55,7 @@ function showPositionCity(position) {
 				}
 			}
 			console.log(userCity);
-			tag = "<section id='city'><b>Location: </b>" + userCity + "</section><br>";
-			$("#connection").after(tag);
+			$(".right_part").eq(1).html(userCity);		// or -  $(".right_part:eq(1)").eq(1).html(userCity);		
 		},
 		error : function(res, error) {
 			console.log(arguments);
