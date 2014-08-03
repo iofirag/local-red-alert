@@ -14,8 +14,7 @@ jQuery(document).ready(function($) {
 function getLocation() {
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(showPositionCity);
-		// $("#user_data").html("123456789");
-		$(".right_part").eq(1).html("123456");
+		// $(".right_part").eq(1).html("123456");
 	} else {
 		alert("Geolocation is not supported by this browser.");
 	}
