@@ -151,7 +151,7 @@ body {
 	font-size: 25px;
 	text-align: right;
 	direction: rtl;
-	max-height: 400px;
+	max-height: 300px;
 	overflow-x: hidden;
 	overflow-y: auto;
 	border: solid black;
