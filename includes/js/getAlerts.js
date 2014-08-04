@@ -204,6 +204,7 @@ function pikudHaoref_jsonLoader() {
 						currDay = new Date().getDay();
 						if ( (lastDay==null || lastDay=="") && lastDay!= currDay){
 							$("#past_alertsList").prepend("<hr>");
+							lastDay = currDay;
 						}
 					}
 
