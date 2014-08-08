@@ -14,7 +14,7 @@ $(window).load(function() {
 	pikudHaoref_jsonLoader();
 	window.setInterval(function() {
 		pikudHaoref_jsonLoader();
-	}, 5000);
+	}, 4000);
 });
 
 function readFromDatabase() {
