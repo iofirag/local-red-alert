@@ -56,7 +56,7 @@ function showPositionCity(position) {
 						userCity = cityWithSpace.substring(1);	//remove the space
 					}
 				}
-				console.log(userCity);
+				//console.log(userCity);
 				$(".right_part").eq(1).html(userCity);		// or -  $(".right_part:eq(1)").html(userCity);		
 			},
 			error : function(res, error) {
