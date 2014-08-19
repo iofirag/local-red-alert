@@ -57,9 +57,9 @@ function pikudHaoref_jsonLoader() {
 
 	// 2 - Mako with YQL
 	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fwww.mako.co.il%2FCollab%2Famudanan%2Fadom.txt%22%20and%20charset%3D'utf-16'&format=json&callback=";
-	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2Fadom.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
+	alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2Fadom.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
 	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2FadomAlert.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
-	alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fwww.oref.org.il%2FWarningMessages%2Falerts.json%22%20and%20charset%3D'utf-16'&format=json&callback=";
+	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fwww.oref.org.il%2FWarningMessages%2Falerts.json%22%20and%20charset%3D'utf-16'&format=json&callback=";
 	$.ajax({
 		dataType : "json",
 		url : alertFile,
@@ -224,16 +224,21 @@ function pikudHaoref_jsonLoader() {
 					/* if this is the first alarm item we adding -remove the bomb picture */
 					if ($('#rocketPic').length > 0) {
 						/* Put value for lastDay variable */
-						lastDay = new Date().getDate();
+						var dt = new Date();
+						lastDay = dt.getDate();
 						
+						//clear the inline style that added in the random image
 						$('#rocketPic').attr("style", "");
-						//clear the inline style add in the random image
 						$('#rocketPic').attr("id", "past_alertsList");
+						
+						$("#past_alertsList").prepend(dt.getFullYear() + "/" + dt.getMonth() + 1 + "/" + dt.getDate());
 					}else {
 						/* Check if change day from the last bomb */
-						currDay = new Date().getDay();
+						var dt = new Date();
+						currDay = dt.getDate();
+
 						if ( (lastDay!=null || lastDay!="") && lastDay!= currDay){
-							$("#past_alertsList").prepend("<hr>");
+							$("#past_alertsList").prepend(dt.getFullYear() + "/" + dt.getMonth() + 1 + "/" + dt.getDate()+"<hr>");
 							lastDay = currDay;
 						}
 					}
