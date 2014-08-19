@@ -57,9 +57,9 @@ function pikudHaoref_jsonLoader() {
 
 	// 2 - Mako with YQL
 	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fwww.mako.co.il%2FCollab%2Famudanan%2Fadom.txt%22%20and%20charset%3D'utf-16'&format=json&callback=";
-	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2Fadom.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
+	alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2Fadom.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
 	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2FadomAlert.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
-	alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fwww.oref.org.il%2FWarningMessages%2Falerts.json%22%20and%20charset%3D'utf-16'&format=json&callback=";
+	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fwww.oref.org.il%2FWarningMessages%2Falerts.json%22%20and%20charset%3D'utf-16'&format=json&callback=";
 	$.ajax({
 		dataType : "json",
 		url : alertFile,
@@ -72,50 +72,79 @@ function pikudHaoref_jsonLoader() {
 
 				//console.log(allp);
 
-				var buffer = [];
-
 				var bufferWordsData = [];
 				var currAlertId;
 				var areas = [];
-
-				/* Run on all dynamic string */
-				for ( i = 0; i < allp.length; i++) {
-					/* Take a character */
-					c = allp[i];
-
-					/* if character is [a-z, A-Z, 0-9] */
-					if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')) {
-						buffer.push(allp[i]);
-						/* if character is not [a-z, A-Z, 0-9] */
-					} else {
-						/* if buffer has data */
-						if (buffer.length > 0) {
-							//build string from buffer [d,a,t,a,2,1.....]
-							str = "";
-							for ( j = 0; j < buffer.length; j++) {
-								str += buffer[j];
-							}
-
-							/* Ignore specific words */
-							if (str != "id" && str != "title" && str != "data") {
-								bufferWordsData.push(str);
-							}
-
-							//init
-							buffer = [];
+				
+//***************WAY-A********************
+				var currAlertId_was = false;
+				var allp_array_space_trim = allp.split(" ");
+				for(i=0; i<allp_array_space_trim.length; i++){
+					
+					// rips off anything that is not a digit
+					var num = allp_array_space_trim[i].replace(/\D/g,'');
+					num = parseInt(num);
+					
+					/* If this is a number */
+					if (num>=0) {
+						if (currAlertId_was == false) {
+							currAlertId = num;
+							currAlertId_was=true;
+						} else {
+							//get area object [number, name, timeToShow]
+							var areaObj = getAreaObj_ByNum(parseInt(num));
+							areas.push(areaObj);
 						}
 					}
 				}
-				// read (first, second, [third, fourth,..last]) items and split data to variables
-				for ( k = 0; k < bufferWordsData.length; k++) {
-					if (k == 0) {
-						currAlertId = bufferWordsData[k];
-					} else {
-						//get area object [number, name, timeToShow]
-						var areaObj = getAreaObj_ByNum(parseInt(bufferWordsData[k]));
-						areas.push(areaObj);
-					}
-				}
+//***************************************
+
+
+
+//****************WAY-B***********************
+//				var buffer = [];
+//
+//				
+//				
+//				/* Run on all dynamic string */
+//				for ( i = 0; i < allp.length; i++) {
+//					/* Take a character */
+//					c = allp[i];
+//
+//					/* if character is [a-z, A-Z, 0-9] */
+//					if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')) {
+//						buffer.push(allp[i]);
+//						/* if character is not [a-z, A-Z, 0-9] */
+//					} else {
+//						/* if buffer has data */
+//						if (buffer.length > 0) {
+//							//build string from buffer [d,a,t,a,2,1.....]
+//							str = "";
+//							for ( j = 0; j < buffer.length; j++) {
+//								str += buffer[j];
+//							}
+//
+//							/* Ignore specific words */
+//							if (str != "id" && str != "title" && str != "data") {
+//								bufferWordsData.push(str);
+//							}
+//
+//							//init
+//							buffer = [];
+//						}
+//					}
+//				}
+//				// read (first, second, [third, fourth,..last]) items and split data to variables
+//				for ( r = 0; r < bufferWordsData.length; r++) {
+//					if (r == 0) {
+//						currAlertId = bufferWordsData[r];
+//					} else {
+//						//get area object [number, name, timeToShow]
+//						var areaObj = getAreaObj_ByNum(parseInt(bufferWordsData[r]));
+//						areas.push(areaObj);
+//					}
+//				}
+//***************************************
 
 				/* if this is the first object
 				 * or if there is areas +and+ ID not equeal to the last ID */
@@ -195,15 +224,15 @@ function pikudHaoref_jsonLoader() {
 					/* if this is the first alarm item we adding -remove the bomb picture */
 					if ($('#rocketPic').length > 0) {
 						/* Put value for lastDay variable */
-						lastDay = new Date().getDay();
+						lastDay = new Date().getDate();
 						
 						$('#rocketPic').attr("style", "");
 						//clear the inline style add in the random image
 						$('#rocketPic').attr("id", "past_alertsList");
 					}else {
-						/* Check if this is a new day */
+						/* Check if change day from the last bomb */
 						currDay = new Date().getDay();
-						if ( (lastDay==null || lastDay=="") && lastDay!= currDay){
+						if ( (lastDay!=null || lastDay!="") && lastDay!= currDay){
 							$("#past_alertsList").prepend("<hr>");
 							lastDay = currDay;
 						}
