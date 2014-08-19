@@ -70,7 +70,7 @@ function pikudHaoref_jsonLoader() {
 				var allp = res.query.results.body.p;
 				connectionGoodResult();
 
-				console.log(allp);
+				//console.log(allp);
 
 				var buffer = [];
 
