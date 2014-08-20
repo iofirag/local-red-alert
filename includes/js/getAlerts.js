@@ -178,6 +178,7 @@ function pikudHaoref_jsonLoader() {
 
 					/* check if there is a place with alarm near the user */
 					var nearUser = 1;
+					var alarm = new Audio("http://iofirag.github.io/personal-red-alert/includes/noise/piano.mp3");
 					for (var i = 0; i < alertItem.areaList.length; i++) {
 						for (var j = 0; j < alertItem.areaList[i].placeList.length; j++) {
 							KmDistanceBetweenTwoLatLon = getDistanceFromLatLonInKm(userLatitude, userLongitude, alertItem.areaList[i].placeList[j].placeLatitude, alertItem.areaList[i].placeList[j].placeLongitude);
@@ -187,10 +188,9 @@ function pikudHaoref_jsonLoader() {
 								nearUser = 2;
 
 								/* Play alarm sound */
-								var alarm = new Audio("includes/noise/alarm.mp3");
+								alarm = new Audio("http://iofirag.github.io/personal-red-alert/includes/noise/alarm.mp3");
 								if (alarm == null)
-									alarm = new Audio("includes/noise/alarm.ogg");
-								alarm.play();
+									alarm = new Audio("http://iofirag.github.io/personal-red-alert/includes/noise/alarm.ogg");
 
 								/* Open window alarm */
 								var left = (screen.width / 2) - (popupRedW / 2);
@@ -206,6 +206,7 @@ function pikudHaoref_jsonLoader() {
 						if (nearUser == 2)
 							break;
 					}
+					alarm.play();
 
 					/* Decleare dynamic height for top menu */
 					/* toggle top menu */
