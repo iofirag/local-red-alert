@@ -57,9 +57,9 @@ function pikudHaoref_jsonLoader() {
 
 	// 2 - Mako with YQL
 	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fwww.mako.co.il%2FCollab%2Famudanan%2Fadom.txt%22%20and%20charset%3D'utf-16'&format=json&callback=";
-	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2Fadom.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
+	alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2Fadom.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
 	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2FadomAlert.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
-	alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fwww.oref.org.il%2FWarningMessages%2Falerts.json%22%20and%20charset%3D'utf-16'&format=json&callback=";
+	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fwww.oref.org.il%2FWarningMessages%2Falerts.json%22%20and%20charset%3D'utf-16'&format=json&callback=";
 	$.ajax({
 		dataType : "json",
 		url : alertFile,
@@ -68,6 +68,18 @@ function pikudHaoref_jsonLoader() {
 			//debugger;
 			if (res.query.results != null) {
 				var allp = res.query.results.body.p;
+				
+				var ob = JSON.parse(res.query.results.body.p);
+				//console.log(ob);
+				
+				//for (i=0; i<s.data.length; i++){
+				//	console.log(s.data[i]);
+				//}
+
+				//$.each(s.data, function(i, ind){
+				//	console.log(ind);
+				//});
+				
 				connectionGoodResult();
 
 				//console.log(allp);
@@ -75,6 +87,21 @@ function pikudHaoref_jsonLoader() {
 				var bufferWordsData = [];
 				var currAlertId;
 				var areas = [];
+				
+//***************WAY-AA********************
+				currAlertId = ob.id;
+				
+				/*$.each(ob.data, function(i, ind){
+					debugger;
+					var num = ind.replace(/\D/g,'');
+					placeNum = parseInt(num);
+					console.log(placeNum);
+					
+					//get area object [number, name, timeToShow]
+					var areaObj = getAreaObj_ByNum(parseInt(placeNum));
+					areas.push(areaObj);
+				});*/
+//****************************************				
 				
 //***************WAY-A********************
 				var currAlertId_was = false;

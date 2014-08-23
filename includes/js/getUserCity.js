@@ -19,7 +19,7 @@ function getLocation() {
 	}
 }
 
-
+//http://maps.googleapis.com/maps/api/geocode/json?address=%D7%90%D7%99%D7%A8%D7%AA%D7%90%D7%97&language=he&sensor=true
 function showPositionCity(position) {
 	if (position!= null){
 		userLatitude = position.coords.latitude;
