@@ -70,11 +70,11 @@ function pikudHaoref_jsonLoader() {
 			try{
 				//debugger;
 				if (res.query.results != null) {
-					//var allp = res.query.results.body.p;
-					//console.log(allp);
+					var allp = res.query.results.body.p;
+					console.log(allp);
 					
 					var ob = JSON.parse(res.query.results.body.p);
-					//console.log(ob);
+					console.log(ob);
 					
 					connectionGoodResult();
 					
@@ -83,7 +83,7 @@ function pikudHaoref_jsonLoader() {
 					var areas = [];
 					
 	//***************WAY-AA********************
-					currAlertId = ob.id;
+	/*				currAlertId = ob.id;
 					
 					$.each(ob.data, function(i, ind){
 						//debugger;
@@ -100,30 +100,30 @@ function pikudHaoref_jsonLoader() {
 						catch(err) {
 						    console.log(err);
 						}
-					});
+					});*/
 	//****************************************				
 					
 	//***************WAY-A********************
-	//				var currAlertId_was = false;
-	//				var allp_array_space_trim = allp.split(" ");
-	//				for(i=0; i<allp_array_space_trim.length; i++){
-	//					
-	//					// rips off anything that is not a digit
-	//					var num = allp_array_space_trim[i].replace(/\D/g,'');
-	//					num = parseInt(num);
-	//					
-	//					/* If this is a number */
-	//					if (num>=0) {
-	//						if (currAlertId_was == false) {
-	//							currAlertId = num;
-	//							currAlertId_was=true;
-	//						} else {
-	//							//get area object [number, name, timeToShow]
-	//							var areaObj = getAreaObj_ByNum(parseInt(num));
-	//							areas.push(areaObj);
-	//						}
-	//					}
-	//				}
+					var currAlertId_was = false;
+					var allp_array_space_trim = allp.split(" ");
+					for(i=0; i<allp_array_space_trim.length; i++){
+						
+						// rips off anything that is not a digit
+						var num = allp_array_space_trim[i].replace(/\D/g,'');
+						num = parseInt(num);
+						
+						/* If this is a number */
+						if (num>=0) {
+							if (currAlertId_was == false) {
+								currAlertId = num;
+								currAlertId_was=true;
+							} else {
+								//get area object [number, name, timeToShow]
+								var areaObj = getAreaObj_ByNum(parseInt(num));
+								areas.push(areaObj);
+							}
+						}
+					}
 	//***************************************
 	
 	
