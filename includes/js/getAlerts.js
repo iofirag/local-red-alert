@@ -45,6 +45,7 @@ function pikudHaoref_jsonLoader() {
 	* (2) - http://www.mako.co.il/Collab/amudanan/adom.txt		(Mako)
 	* (3) - http://iofirag.github.io/personal-red-alert/test/adom.txt			(Test file from my server)
 	* (4) - http://iofirag.github.io/personal-red-alert/test/adomAlert.txt		(Test file from my server + alert)
+	* (5) - http://iofirag.github.io/personal-red-alert/test/adomstr.txt		(Test file from my server with area strings)
 	*
 	* YQL:	select * from html where url='' and charset='utf-16'
 	*
@@ -81,98 +82,29 @@ function pikudHaoref_jsonLoader() {
 					var bufferWordsData = [];
 					var currAlertId;
 					var areas = [];
+					var areaObj;
 					
 	//***************WAY-AA********************
-	/*				currAlertId = ob.id;
+					// Save the id from the json obj
+					currAlertId = ob.id;
 					
+					// Run on json object
 					$.each(ob.data, function(i, ind){
-						//debugger;
 						try {
 							// rips off anything that is not a digit
 						    var num = ind.replace(/\D/g,'');
 							placeNum = parseInt(num);
-							//console.log(placeNum);
 							
 							//get area object [number, name, timeToShow]
-							var areaObj = getAreaObj_ByNum(parseInt(placeNum));
+							areaObj = getAreaObj_ByNum(parseInt(placeNum));
 							areas.push(areaObj);
 						}
 						catch(err) {
 						    console.log(err);
 						}
-					});*/
-	//****************************************				
+					});
+	//****************************************
 					
-	//***************WAY-A********************
-					var currAlertId_was = false;
-					var allp_array_space_trim = allp.split(" ");
-					for(i=0; i<allp_array_space_trim.length; i++){
-						
-						// rips off anything that is not a digit
-						var num = allp_array_space_trim[i].replace(/\D/g,'');
-						num = parseInt(num);
-						
-						/* If this is a number */
-						if (num>=0) {
-							if (currAlertId_was == false) {
-								currAlertId = num;
-								currAlertId_was=true;
-							} else {
-								//get area object [number, name, timeToShow]
-								var areaObj = getAreaObj_ByNum(parseInt(num));
-								areas.push(areaObj);
-							}
-						}
-					}
-	//***************************************
-	
-	
-	
-	//****************WAY-B***********************
-	//				var buffer = [];
-	//
-	//				
-	//				
-	//				/* Run on all dynamic string */
-	//				for ( i = 0; i < allp.length; i++) {
-	//					/* Take a character */
-	//					c = allp[i];
-	//
-	//					/* if character is [a-z, A-Z, 0-9] */
-	//					if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')) {
-	//						buffer.push(allp[i]);
-	//						/* if character is not [a-z, A-Z, 0-9] */
-	//					} else {
-	//						/* if buffer has data */
-	//						if (buffer.length > 0) {
-	//							//build string from buffer [d,a,t,a,2,1.....]
-	//							str = "";
-	//							for ( j = 0; j < buffer.length; j++) {
-	//								str += buffer[j];
-	//							}
-	//
-	//							/* Ignore specific words */
-	//							if (str != "id" && str != "title" && str != "data") {
-	//								bufferWordsData.push(str);
-	//							}
-	//
-	//							//init
-	//							buffer = [];
-	//						}
-	//					}
-	//				}
-	//				// read (first, second, [third, fourth,..last]) items and split data to variables
-	//				for ( r = 0; r < bufferWordsData.length; r++) {
-	//					if (r == 0) {
-	//						currAlertId = bufferWordsData[r];
-	//					} else {
-	//						//get area object [number, name, timeToShow]
-	//						var areaObj = getAreaObj_ByNum(parseInt(bufferWordsData[r]));
-	//						areas.push(areaObj);
-	//					}
-	//				}
-	//***************************************
-	
 					/* if this is the first object
 					 * or if there is areas +and+ ID not equeal to the last ID */
 					if ((areas.length > 0) && ((alertItem == null) || ((currAlertId != alertItem.alertId) && (areas.length > 0)))) {
