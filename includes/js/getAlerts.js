@@ -53,243 +53,246 @@ function pikudHaoref_jsonLoader() {
 	* YQL +(3):   https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2Fadom.txt'%20and%20charset%3D'utf-16'&format=json&callback=
 	* YQL +(4):   https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2FadomAlert.txt'%20and%20charset%3D'utf-16'&format=json&callback=
 	* YQL error:   https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fredalert.eu5.org%2Fnot_use%2FadomAlert.txt'%20and%20charset%3D'utf-16'&format=json&callback=
+	* YQL +(5):   https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2Fadom.txt'%20and%20charset%3D'utf-16'&format=json&callback=
 	*************************************************************************************************************************************************************************************************************************/
 
 	// 2 - Mako with YQL
 	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fwww.mako.co.il%2FCollab%2Famudanan%2Fadom.txt%22%20and%20charset%3D'utf-16'&format=json&callback=";
-	alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2Fadom.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
+	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2Fadom.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
 	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2FadomAlert.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
-	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fwww.oref.org.il%2FWarningMessages%2Falerts.json%22%20and%20charset%3D'utf-16'&format=json&callback=";
+	alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fwww.oref.org.il%2FWarningMessages%2Falerts.json%22%20and%20charset%3D'utf-16'&format=json&callback=";
+	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2Fadomstr.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
 	$.ajax({
 		dataType : "json",
 		url : alertFile,
 		type : 'GET',
 		success : function(res) {
-			//debugger;
-			if (res.query.results != null) {
-				var allp = res.query.results.body.p;
-				
-				var ob = JSON.parse(res.query.results.body.p);
-				//console.log(ob);
-				
-				//for (i=0; i<s.data.length; i++){
-				//	console.log(s.data[i]);
-				//}
-
-				//$.each(s.data, function(i, ind){
-				//	console.log(ind);
-				//});
-				
-				connectionGoodResult();
-
-				//console.log(allp);
-
-				var bufferWordsData = [];
-				var currAlertId;
-				var areas = [];
-				
-//***************WAY-AA********************
-				currAlertId = ob.id;
-				
-				/*$.each(ob.data, function(i, ind){
-					debugger;
-					var num = ind.replace(/\D/g,'');
-					placeNum = parseInt(num);
-					console.log(placeNum);
+			try{
+				//debugger;
+				if (res.query.results != null) {
+					//var allp = res.query.results.body.p;
+					//console.log(allp);
 					
-					//get area object [number, name, timeToShow]
-					var areaObj = getAreaObj_ByNum(parseInt(placeNum));
-					areas.push(areaObj);
-				});*/
-//****************************************				
-				
-//***************WAY-A********************
-				var currAlertId_was = false;
-				var allp_array_space_trim = allp.split(" ");
-				for(i=0; i<allp_array_space_trim.length; i++){
+					var ob = JSON.parse(res.query.results.body.p);
+					//console.log(ob);
 					
-					// rips off anything that is not a digit
-					var num = allp_array_space_trim[i].replace(/\D/g,'');
-					num = parseInt(num);
+					connectionGoodResult();
 					
-					/* If this is a number */
-					if (num>=0) {
-						if (currAlertId_was == false) {
-							currAlertId = num;
-							currAlertId_was=true;
-						} else {
+					var bufferWordsData = [];
+					var currAlertId;
+					var areas = [];
+					
+	//***************WAY-AA********************
+					currAlertId = ob.id;
+					
+					$.each(ob.data, function(i, ind){
+						debugger;
+						try {
+							// rips off anything that is not a digit
+						    var num = ind.replace(/\D/g,'');
+							placeNum = parseInt(num);
+							console.log(placeNum);
+							
 							//get area object [number, name, timeToShow]
-							var areaObj = getAreaObj_ByNum(parseInt(num));
+							var areaObj = getAreaObj_ByNum(parseInt(placeNum));
 							areas.push(areaObj);
 						}
-					}
-				}
-//***************************************
-
-
-
-//****************WAY-B***********************
-//				var buffer = [];
-//
-//				
-//				
-//				/* Run on all dynamic string */
-//				for ( i = 0; i < allp.length; i++) {
-//					/* Take a character */
-//					c = allp[i];
-//
-//					/* if character is [a-z, A-Z, 0-9] */
-//					if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')) {
-//						buffer.push(allp[i]);
-//						/* if character is not [a-z, A-Z, 0-9] */
-//					} else {
-//						/* if buffer has data */
-//						if (buffer.length > 0) {
-//							//build string from buffer [d,a,t,a,2,1.....]
-//							str = "";
-//							for ( j = 0; j < buffer.length; j++) {
-//								str += buffer[j];
-//							}
-//
-//							/* Ignore specific words */
-//							if (str != "id" && str != "title" && str != "data") {
-//								bufferWordsData.push(str);
-//							}
-//
-//							//init
-//							buffer = [];
-//						}
-//					}
-//				}
-//				// read (first, second, [third, fourth,..last]) items and split data to variables
-//				for ( r = 0; r < bufferWordsData.length; r++) {
-//					if (r == 0) {
-//						currAlertId = bufferWordsData[r];
-//					} else {
-//						//get area object [number, name, timeToShow]
-//						var areaObj = getAreaObj_ByNum(parseInt(bufferWordsData[r]));
-//						areas.push(areaObj);
-//					}
-//				}
-//***************************************
-
-				/* if this is the first object
-				 * or if there is areas +and+ ID not equeal to the last ID */
-				if ((areas.length > 0) && ((alertItem == null) || ((currAlertId != alertItem.alertId) && (areas.length > 0)))) {
-					/* Create Alert Obj */
-					alertItem = new Alert(currAlertId, areas);
-
-					/* show alert with html */
-					var now_strToShow = "<ul>";
-					var past_strToShow = "";
-					
-					/* Run on area list */
-					for ( n = 0; n < alertItem.areaList.length; n++) {
-
-						/* if not last area in array */
-						if (n != alertItem.areaList.length - 1) {
-							now_strToShow += "<li>" + alertItem.areaList[n].areaName + " " + alertItem.areaList[n].areaNumber + "</li>";
-							past_strToShow += alertItem.areaList[n].areaName + " " + alertItem.areaList[n].areaNumber + ",   ";
-						} else {
-							now_strToShow += "<li>" + alertItem.areaList[n].areaName + " " + alertItem.areaList[n].areaNumber + "</li></ul>";
-							past_strToShow += alertItem.areaList[n].areaName + " " + alertItem.areaList[n].areaNumber;
+						catch(err) {
+						    console.log(err);
 						}
-					}
-
-					/* open menu for the higher time to show area */
-					var timeToShow_higher = 0;
-					for ( i = 0; i < alertItem.areaList.length; i++) {
-						if (timeToShow_higher < areaObj.timeToShow)
-							timeToShow_higher = areaObj.timeToShow;
-					}
-
-					/* check if there is a place with alarm near the user */
-					var nearUser = 1;
-					var alarm = new Audio("http://iofirag.github.io/personal-red-alert/includes/noise/piano.mp3");
-					for (var i = 0; i < alertItem.areaList.length; i++) {
-						for (var j = 0; j < alertItem.areaList[i].placeList.length; j++) {
-							KmDistanceBetweenTwoLatLon = getDistanceFromLatLonInKm(userLatitude, userLongitude, alertItem.areaList[i].placeList[j].placeLatitude, alertItem.areaList[i].placeList[j].placeLongitude);
-
-							/* play alarm - if user in range of one of the alarms area */
-							if (KmDistanceBetweenTwoLatLon <= 5) {
-								nearUser = 2;
-
-								/* Play alarm sound */
-								alarm = new Audio("http://iofirag.github.io/personal-red-alert/includes/noise/alarm.mp3");
-								if (alarm == null)
-									alarm = new Audio("http://iofirag.github.io/personal-red-alert/includes/noise/alarm.ogg");
-
-								/* Open window alarm */
-								var left = (screen.width / 2) - (popupRedW / 2);
-								var top = (screen.height / 2) - (popupRedH / 2);
-								console.log(left +" "+top);
-								var popupRed = window.open('http://iofirag.github.io/personal-red-alert/red.html', 'Red-Alert in your location',            'width='+popupRedW+', height='+popupRedH+', top='+top+', left='+left+ ',toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1');
-								setTimeout(function() {
-									popupRed.close();
-								}, timeToShow_higher*1000);
-								break;
+					});
+	//****************************************				
+					
+	//***************WAY-A********************
+	//				var currAlertId_was = false;
+	//				var allp_array_space_trim = allp.split(" ");
+	//				for(i=0; i<allp_array_space_trim.length; i++){
+	//					
+	//					// rips off anything that is not a digit
+	//					var num = allp_array_space_trim[i].replace(/\D/g,'');
+	//					num = parseInt(num);
+	//					
+	//					/* If this is a number */
+	//					if (num>=0) {
+	//						if (currAlertId_was == false) {
+	//							currAlertId = num;
+	//							currAlertId_was=true;
+	//						} else {
+	//							//get area object [number, name, timeToShow]
+	//							var areaObj = getAreaObj_ByNum(parseInt(num));
+	//							areas.push(areaObj);
+	//						}
+	//					}
+	//				}
+	//***************************************
+	
+	
+	
+	//****************WAY-B***********************
+	//				var buffer = [];
+	//
+	//				
+	//				
+	//				/* Run on all dynamic string */
+	//				for ( i = 0; i < allp.length; i++) {
+	//					/* Take a character */
+	//					c = allp[i];
+	//
+	//					/* if character is [a-z, A-Z, 0-9] */
+	//					if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')) {
+	//						buffer.push(allp[i]);
+	//						/* if character is not [a-z, A-Z, 0-9] */
+	//					} else {
+	//						/* if buffer has data */
+	//						if (buffer.length > 0) {
+	//							//build string from buffer [d,a,t,a,2,1.....]
+	//							str = "";
+	//							for ( j = 0; j < buffer.length; j++) {
+	//								str += buffer[j];
+	//							}
+	//
+	//							/* Ignore specific words */
+	//							if (str != "id" && str != "title" && str != "data") {
+	//								bufferWordsData.push(str);
+	//							}
+	//
+	//							//init
+	//							buffer = [];
+	//						}
+	//					}
+	//				}
+	//				// read (first, second, [third, fourth,..last]) items and split data to variables
+	//				for ( r = 0; r < bufferWordsData.length; r++) {
+	//					if (r == 0) {
+	//						currAlertId = bufferWordsData[r];
+	//					} else {
+	//						//get area object [number, name, timeToShow]
+	//						var areaObj = getAreaObj_ByNum(parseInt(bufferWordsData[r]));
+	//						areas.push(areaObj);
+	//					}
+	//				}
+	//***************************************
+	
+					/* if this is the first object
+					 * or if there is areas +and+ ID not equeal to the last ID */
+					if ((areas.length > 0) && ((alertItem == null) || ((currAlertId != alertItem.alertId) && (areas.length > 0)))) {
+						/* Create Alert Obj */
+						alertItem = new Alert(currAlertId, areas);
+	
+						/* show alert with html */
+						var now_strToShow = "<ul>";
+						var past_strToShow = "";
+						
+						/* Run on area list */
+						for ( n = 0; n < alertItem.areaList.length; n++) {
+	
+							/* if not last area in array */
+							if (n != alertItem.areaList.length - 1) {
+								now_strToShow += "<li>" + alertItem.areaList[n].areaName + " " + alertItem.areaList[n].areaNumber + "</li>";
+								past_strToShow += alertItem.areaList[n].areaName + " " + alertItem.areaList[n].areaNumber + ",   ";
+							} else {
+								now_strToShow += "<li>" + alertItem.areaList[n].areaName + " " + alertItem.areaList[n].areaNumber + "</li></ul>";
+								past_strToShow += alertItem.areaList[n].areaName + " " + alertItem.areaList[n].areaNumber;
 							}
 						}
-						if (nearUser == 2)
-							break;
-					}
-					alarm.play();
-
-					/* Decleare dynamic height for top menu */
-					/* toggle top menu */
-					//toggleNav("close");
-					toggleNav("open",nearUser);
-
-					/* put data on top menu */
-					$("#now_alertList").html("<section class='now_alertItem'>" + now_strToShow + "</section>");
-
-					setTimeout(function() {
-						toggleNav("close");
-						toggleNav("open",0);
-						$(".past_alertItem").css("background-color", "");
-					}, timeToShow_higher * 1000);
-
-					/* if this is the first alarm item we adding -remove the bomb picture */
-					if ($('#rocketPic').length > 0) {
-						/* Put value for lastDay variable */
-						var dt = new Date();
-						lastDay = dt.getDate();
-						
-						//clear the inline style that added in the random image
-						$('#rocketPic').attr("style", "");
-						$('#rocketPic').attr("id", "past_alertsList");
-						
-						$("#past_alertsList").prepend(dt.getDate() + "/" + parseInt(dt.getMonth()+1) + "/" + dt.getFullYear());
-					}else {
-						/* Check if change day from the last bomb */
-						var dt = new Date();
-						currDay = dt.getDate();
-
-						if ( (lastDay!=null || lastDay!="") && lastDay!= currDay){
-							$("#past_alertsList").prepend( dt.getDate() + "/" + parseInt(dt.getMonth()+1) + "/" + dt.getFullYear()+"<hr>");
-							lastDay = currDay;
+	
+						/* open menu for the higher time to show area */
+						var timeToShow_higher = 0;
+						for ( i = 0; i < alertItem.areaList.length; i++) {
+							if (timeToShow_higher < areaObj.timeToShow)
+								timeToShow_higher = areaObj.timeToShow;
 						}
+	
+						/* check if there is a place with alarm near the user */
+						var nearUser = 1;
+						var alarm = new Audio("http://iofirag.github.io/personal-red-alert/includes/noise/piano.mp3");
+						for (var i = 0; i < alertItem.areaList.length; i++) {
+							for (var j = 0; j < alertItem.areaList[i].placeList.length; j++) {
+								KmDistanceBetweenTwoLatLon = getDistanceFromLatLonInKm(userLatitude, userLongitude, alertItem.areaList[i].placeList[j].placeLatitude, alertItem.areaList[i].placeList[j].placeLongitude);
+	
+								/* play alarm - if user in range of one of the alarms area */
+								if (KmDistanceBetweenTwoLatLon <= 5) {
+									nearUser = 2;
+	
+									/* Play alarm sound */
+									alarm = new Audio("http://iofirag.github.io/personal-red-alert/includes/noise/alarm.mp3");
+									if (alarm == null)
+										alarm = new Audio("http://iofirag.github.io/personal-red-alert/includes/noise/alarm.ogg");
+	
+									/* Open window alarm */
+									var left = (screen.width / 2) - (popupRedW / 2);
+									var top = (screen.height / 2) - (popupRedH / 2);
+									console.log(left +" "+top);
+									var popupRed = window.open('http://iofirag.github.io/personal-red-alert/red.html', 'Red-Alert in your location',            'width='+popupRedW+', height='+popupRedH+', top='+top+', left='+left+ ',toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1');
+									setTimeout(function() {
+										popupRed.close();
+									}, timeToShow_higher*1000);
+									break;
+								}
+							}
+							if (nearUser == 2)
+								break;
+						}
+						alarm.play();
+	
+						/* Decleare dynamic height for top menu */
+						/* toggle top menu */
+						//toggleNav("close");
+						toggleNav("open",nearUser);
+	
+						/* put data on top menu */
+						$("#now_alertList").html("<section class='now_alertItem'>" + now_strToShow + "</section>");
+	
+						setTimeout(function() {
+							toggleNav("close");
+							toggleNav("open",0);
+							$(".past_alertItem").css("background-color", "");
+						}, timeToShow_higher * 1000);
+	
+						/* if this is the first alarm item we adding -remove the bomb picture */
+						if ($('#rocketPic').length > 0) {
+							/* Put value for lastDay variable */
+							var dt = new Date();
+							lastDay = dt.getDate();
+							
+							//clear the inline style that added in the random image
+							$('#rocketPic').attr("style", "");
+							$('#rocketPic').attr("id", "past_alertsList");
+							
+							$("#past_alertsList").prepend(dt.getDate() + "/" + parseInt(dt.getMonth()+1) + "/" + dt.getFullYear());
+						}else {
+							/* Check if change day from the last bomb */
+							var dt = new Date();
+							currDay = dt.getDate();
+	
+							if ( (lastDay!=null || lastDay!="") && lastDay!= currDay){
+								$("#past_alertsList").prepend( dt.getDate() + "/" + parseInt(dt.getMonth()+1) + "/" + dt.getFullYear()+"<hr>");
+								lastDay = currDay;
+							}
+						}
+	
+						item = "<b>" + alertItem.time.timeReceived + "</B> - " + past_strToShow;
+						
+						/* get the number of child of #past_alertsList and calculate dynamic height to set */
+						// console.log( $("#past_alertsList").length );
+						//$("#past_alertsList").css("height",  );
+						//only max height ??
+						
+						/* Add alarm line */
+						$("#past_alertsList").prepend("<section class='past_alertItem' style='background-color: black;'>" + item + "</section>");
+	
+					} else {
+						/* garbich data */
+						toggleNav("open",0);
 					}
-
-					item = "<b>" + alertItem.time.timeReceived + "</B> - " + past_strToShow;
-					
-					/* get the number of child of #past_alertsList and calculate dynamic height to set */
-					// console.log( $("#past_alertsList").length );
-					//$("#past_alertsList").css("height",  );
-					//only max height ??
-					
-					/* Add alarm line */
-					$("#past_alertsList").prepend("<section class='past_alertItem' style='background-color: black;'>" + item + "</section>");
-
+	
+					//init areas
+					areas = [];
 				} else {
-					/* garbich data */
-					toggleNav("open",0);
+					connectionBadResult();
 				}
-
-				//init areas
-				areas = [];
-			} else {
-				connectionBadResult();
+			}catch(err) {
+			    console.log(err);
 			}
 		},
 		error : function(res, error) {
