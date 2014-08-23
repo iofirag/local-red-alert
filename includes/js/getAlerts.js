@@ -86,7 +86,7 @@ function pikudHaoref_jsonLoader() {
 					currAlertId = ob.id;
 					
 					$.each(ob.data, function(i, ind){
-						debugger;
+						//debugger;
 						try {
 							// rips off anything that is not a digit
 						    var num = ind.replace(/\D/g,'');
