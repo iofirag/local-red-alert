@@ -91,7 +91,7 @@ function pikudHaoref_jsonLoader() {
 							// rips off anything that is not a digit
 						    var num = ind.replace(/\D/g,'');
 							placeNum = parseInt(num);
-							console.log(placeNum);
+							//console.log(placeNum);
 							
 							//get area object [number, name, timeToShow]
 							var areaObj = getAreaObj_ByNum(parseInt(placeNum));
