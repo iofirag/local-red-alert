@@ -71,11 +71,11 @@ function pikudHaoref_jsonLoader() {
 			try{
 				//debugger;
 				if (res.query.results != null) {
-					var allp = res.query.results.body.p;
-					console.log(allp);
+					//var allp = res.query.results.body.p;
+					//console.log(allp);
 					
 					var ob = JSON.parse(res.query.results.body.p);
-					console.log(ob);
+					//console.log(ob);
 					
 					connectionGoodResult();
 					
