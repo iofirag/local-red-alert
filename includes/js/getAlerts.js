@@ -175,16 +175,13 @@ function pikudHaoref_jsonLoader() {
 						/* put data on top menu */
 						$("#now_alertList").html("<section class='now_alertItem'>" + now_strToShow + "</section>");
 	
-						setTimeout(function() {
-							toggleNav("close");
-							toggleNav("open",0);
-							$(".past_alertItem").css("background-color", "");
-						}, timeToShow_higher * 1000);
+						//--------
 	
+						var dt = new Date();
 						/* if this is the first alarm item we adding -remove the bomb picture */
 						if ($('#rocketPic').length > 0) {
 							/* Put value for lastDay variable */
-							var dt = new Date();
+							
 							lastDay = dt.getDate();
 							
 							//clear the inline style that added in the random image
@@ -211,8 +208,14 @@ function pikudHaoref_jsonLoader() {
 						//only max height ??
 						
 						/* Add alarm line */
-						$("#past_alertsList").prepend("<section class='past_alertItem' style='background-color: black;'>" + item + "</section>");
+						var timeMiliSec = dt.getMilliseconds();
+						$("#past_alertsList").prepend("<section id='"+timeMiliSec+"' class='past_alertItem' style='background-color: greenyellow;'>" + item + "</section>");
 	
+						setTimeout(function() {
+							toggleNav("close");
+							toggleNav("open",0);
+							$("#"+timeMiliSec).css("background-color", "");
+						}, timeToShow_higher * 1000);
 					} else {
 						/* garbich data */
 						toggleNav("open",0);
