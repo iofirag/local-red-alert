@@ -180,11 +180,19 @@ function pikudHaoref_jsonLoader() {
 							speechSynthesis.speak(sts);
 							
 							// read all area's
-							$.each(alertItem.areaList, function(i, areaItem){
+							for (var i = 0; i < alertItem.areaList.length; i++) {
+								// do switch case for all areas
 								debugger;
-								sts.text = areaItem.areaNumber;
-								speechSynthesis.speak(sts);
-							});
+								var number = new SpeechSynthesisUtterance();
+								number.text = alertItem.areaList[i].areaNumber;
+								speechSynthesis.speak(number);
+							}
+							// $.each(alertItem.areaList, function(i, areaItem){
+								// debugger;
+								// 
+								// sts.text = areaItem.areaNumber;
+								// speechSynthesis.speak(sts);
+							// });
 						}
 	
 						/* Decleare dynamic height for top menu */
