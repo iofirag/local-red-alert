@@ -3,6 +3,21 @@ var userLongitude;
 var userCity;
 
 jQuery(document).ready(function($) {
+	//debugger;
+	//var u = new SpeechSynthesisUtterance('Hello World');
+     //u.text = 'Hello World';
+     // u.lang = 'en-US';
+     // u.rate = 1.2;
+     // u.onend = function(event) { alert('Finished in ' + event.elapsedTime + ' seconds.'); }
+     // speechSynthesis.speak(u);
+//      
+     // var msg = new SpeechSynthesisUtterance('Hello World2');
+	// speechSynthesis.speak(msg);
+// 	
+	// msg = new SpeechSynthesisUtterance('שלום');
+	// speechSynthesis.speak(msg);
+	
+	//speechSynthesis.speak(new SpeechSynthesisUtterance('Hello World'));
 	getLocation();
 	window.setInterval(function() {
 		getLocation();
@@ -30,10 +45,11 @@ function showPositionCity(position) {
 		//apiKey = "AIzaSyDIqDiNyzt3qDt84d_5Lds7cHTPx7xLqaY";
 	
 		var method = 'GET';
-		var mapsUrl = 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + ',' + position.coords.longitude + '&sensor=true';
+		var mapsUrl_he = 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + ',' + position.coords.longitude + '&language=he&sensor=true';
+		//var mapsUrl_en = 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + ',' + position.coords.longitude + '&language=en&sensor=true';
 		var async = true;
 		$.ajax({
-			url : mapsUrl,
+			url : mapsUrl_he,
 			dataType : 'json',
 			type : 'GET',
 			success : function(res) {

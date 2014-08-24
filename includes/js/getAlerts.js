@@ -137,24 +137,27 @@ function pikudHaoref_jsonLoader() {
 	
 						/* check if there is a place with alarm near the user */
 						var nearUser = 1;
-						var alarm = new Audio("http://iofirag.github.io/personal-red-alert/includes/noise/piano.mp3");
+						//var alarm = new Audio("http://iofirag.github.io/personal-red-alert/includes/noise/piano.mp3");
+						
+						
 						for (var i = 0; i < alertItem.areaList.length; i++) {
 							for (var j = 0; j < alertItem.areaList[i].placeList.length; j++) {
 								KmDistanceBetweenTwoLatLon = getDistanceFromLatLonInKm(userLatitude, userLongitude, alertItem.areaList[i].placeList[j].placeLatitude, alertItem.areaList[i].placeList[j].placeLongitude);
 	
 								/* play alarm - if user in range of one of the alarms area */
-								if (KmDistanceBetweenTwoLatLon <= 5) {
+								if (KmDistanceBetweenTwoLatLon <= 4) {
 									nearUser = 2;
 	
+									
 									/* Play alarm sound */
-									alarm = new Audio("http://iofirag.github.io/personal-red-alert/includes/noise/alarm.mp3");
-									if (alarm == null)
-										alarm = new Audio("http://iofirag.github.io/personal-red-alert/includes/noise/alarm.ogg");
+									//alarm = new Audio("http://iofirag.github.io/personal-red-alert/includes/noise/alarm.mp3");
+									//if (alarm == null)
+									//	alarm = new Audio("http://iofirag.github.io/personal-red-alert/includes/noise/alarm.ogg");
 	
 									/* Open window alarm */
 									var left = (screen.width / 2) - (popupRedW / 2);
 									var top = (screen.height / 2) - (popupRedH / 2);
-									console.log(left +" "+top);
+									//console.log(left +" "+top);
 									var popupRed = window.open('http://iofirag.github.io/personal-red-alert/red.html', 'Red-Alert in your location',            'width='+popupRedW+', height='+popupRedH+', top='+top+', left='+left+ ',toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1');
 									setTimeout(function() {
 										popupRed.close();
@@ -165,7 +168,24 @@ function pikudHaoref_jsonLoader() {
 							if (nearUser == 2)
 								break;
 						}
-						alarm.play();
+						//alarm.play();
+						
+						var sts = new SpeechSynthesisUtterance();
+						if(nearUser ==2){
+							sts.text = "azaaka ba-ezor shel-ha. azaaka ba ezor shel ha!";
+							speechSynthesis.speak(sts);
+						}else{
+							// title: azaakot bea:
+							sts.text = "azaakot bea";
+							speechSynthesis.speak(sts);
+							
+							// read all area's
+							$.each(alertItem.areaList, function(i, areaItem){
+								debugger;
+								sts.text = areaItem.areaNumber;
+								speechSynthesis.speak(sts);
+							});
+						}
 	
 						/* Decleare dynamic height for top menu */
 						/* toggle top menu */
