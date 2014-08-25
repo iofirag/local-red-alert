@@ -59,9 +59,9 @@ function pikudHaoref_jsonLoader() {
 
 	// 2 - Mako with YQL
 	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fwww.mako.co.il%2FCollab%2Famudanan%2Fadom.txt%22%20and%20charset%3D'utf-16'&format=json&callback=";
-	alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2Fadom.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
+	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2Fadom.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
 	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2FadomAlert.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
-	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fwww.oref.org.il%2FWarningMessages%2Falerts.json%22%20and%20charset%3D'utf-16'&format=json&callback=";
+	alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fwww.oref.org.il%2FWarningMessages%2Falerts.json%22%20and%20charset%3D'utf-16'&format=json&callback=";
 	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2Fadomstr.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
 	$.ajax({
 		dataType : "json",
@@ -170,17 +170,14 @@ function pikudHaoref_jsonLoader() {
 						}
 						//alarm.play();
 						
-						debugger;
+						
 						/* if near to user */
 						var alarm;
 						var sts = new SpeechSynthesisUtterance();
 						if(nearUser ==2){
 							/* Play alarm sound */
-							alarm = new Audio("http://iofirag.github.io/personal-red-alert/includes/noise/alarm.mp3");
-							if (alarm == null){
-								alarm = new Audio("http://iofirag.github.io/personal-red-alert/includes/noise/alarm.ogg");
-							}
-							alarm.play();
+							alarm = new Audio("http://iofirag.github.io/personal-red-alert/includes/noise/piano.mp3");
+							if (alarm) alarm.play();
 							
 							// Read "AZAAKA"
 							sts.text = "azaaka ba-ezor shel-ha. azaaka ba ezor shel ha!";
@@ -188,7 +185,7 @@ function pikudHaoref_jsonLoader() {
 						}else{
 							/* Play alarm sound */
 							alarm = new Audio("http://iofirag.github.io/personal-red-alert/includes/noise/ding.mp3");
-							alarm.play();
+							if (alarm) alarm.play();
 							
 							// title: azaakot bea:
 							sts.text = "azaakot bea";
