@@ -11,10 +11,11 @@ function Alert(alertIdVal, areasVal) {
 }
 
 
-function Area(areaNumberVal, areaNameVal, timeToShowVal, placesVal) {
+function Area(areaNumberVal, areaNameVal, areaTTSVal, timeToShowVal, placesVal) {
 	var areaItem = {
 		areaNumber : areaNumberVal,
 		areaName : areaNameVal,
+		areaTTSName : areaTTSVal,
 		timeToShow : timeToShowVal,
 		placeList : placesVal
 	};

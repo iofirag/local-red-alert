@@ -59,9 +59,9 @@ function pikudHaoref_jsonLoader() {
 
 	// 2 - Mako with YQL
 	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fwww.mako.co.il%2FCollab%2Famudanan%2Fadom.txt%22%20and%20charset%3D'utf-16'&format=json&callback=";
-	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2Fadom.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
+	alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2Fadom.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
 	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2FadomAlert.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
-	alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fwww.oref.org.il%2FWarningMessages%2Falerts.json%22%20and%20charset%3D'utf-16'&format=json&callback=";
+	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fwww.oref.org.il%2FWarningMessages%2Falerts.json%22%20and%20charset%3D'utf-16'&format=json&callback=";
 	//alertFile = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fiofirag.github.io%2Fpersonal-red-alert%2Ftest%2Fadomstr.txt'%20and%20charset%3D'utf-16'&format=json&callback=";
 	$.ajax({
 		dataType : "json",
@@ -170,22 +170,35 @@ function pikudHaoref_jsonLoader() {
 						}
 						//alarm.play();
 						
+						debugger;
+						/* if near to user */
+						var alarm;
 						var sts = new SpeechSynthesisUtterance();
 						if(nearUser ==2){
+							/* Play alarm sound */
+							alarm = new Audio("http://iofirag.github.io/personal-red-alert/includes/noise/alarm.mp3");
+							if (alarm == null){
+								alarm = new Audio("http://iofirag.github.io/personal-red-alert/includes/noise/alarm.ogg");
+							}
+							alarm.play();
+							
+							// Read "AZAAKA"
 							sts.text = "azaaka ba-ezor shel-ha. azaaka ba ezor shel ha!";
 							speechSynthesis.speak(sts);
 						}else{
+							/* Play alarm sound */
+							alarm = new Audio("http://iofirag.github.io/personal-red-alert/includes/noise/ding.mp3");
+							alarm.play();
+							
 							// title: azaakot bea:
 							sts.text = "azaakot bea";
 							speechSynthesis.speak(sts);
 							
 							// read all area's
 							for (var i = 0; i < alertItem.areaList.length; i++) {
-								// do switch case for all areas
-								debugger;
-								var number = new SpeechSynthesisUtterance();
-								number.text = alertItem.areaList[i].areaNumber;
-								speechSynthesis.speak(number);
+								var areaName = new SpeechSynthesisUtterance();
+								areaName.text = alertItem.areaList[i].areaTTSName;
+								speechSynthesis.speak(areaName);
 							}
 							// $.each(alertItem.areaList, function(i, areaItem){
 								// debugger;
@@ -288,23 +301,27 @@ function internetConnectionError() {
 }
 
 function getAreaObj_ByNum(num) {
-	var areaObj = new Area();
-
-	areaObj.areaNumber = num;
-	areaObj.areaName = "";
-	areaObj.timeToShow = "";
-
 	placeList = [];
+	
+	var areaObj = new Area();
+	areaObj.areaNumber = num;
+	
 	/* find areaNumber in database */
 	for (i in database) {
-
+		
+		// find if the row- area number are equal to the area number we find
 		if (database[i].ExcelAreaNumber == num) {
-			/*only 1 time */
-			if (areaObj.timeToShow == "") {
+
+			/* it's enugh to find only 1 from the list that have this values, 
+			 * because all of rows that (database[i].ExcelAreaNumber == num) are with the same values */
+			if (areaObj.timeToShow == null) {
 				areaObj.timeToShow = database[i].ExcelTimeToShow;
 			}
-			if (areaObj.areaName == "") {
+			if (areaObj.areaName == null) {
 				areaObj.areaName = database[i].ExcelAreaName;
+			}
+			if (areaObj.areaTTSName == null) {
+				areaObj.areaTTSName = database[i].ExcelEnAreaName;
 			}
 			/* Build placeList */
 			placeItem = new Place(database[i].ExcelPlaceName, database[i].ExcelPlaceLatitude, database[i].ExcelPlaceLongitude);
