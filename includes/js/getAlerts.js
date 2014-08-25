@@ -188,7 +188,7 @@ function pikudHaoref_jsonLoader() {
 							if (alarm) alarm.play();
 							
 							// title: azaakot bea:
-							sts.text = "azaakote, beh";
+							sts.text = "aazzaakote, beh";
 							speechSynthesis.speak(sts);
 							
 							// read all area's
