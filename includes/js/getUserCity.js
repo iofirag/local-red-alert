@@ -28,7 +28,7 @@ jQuery(document).ready(function($) {
 
 function getLocation() {
 	if (navigator.geolocation) {
-		$(".right_part").eq(1).html("Location Enabled");		// or -  $(".right_part:eq(1)").html(userCity);
+		//$(".right_part").eq(1).html("Location Enabled");		// or -  $(".right_part:eq(1)").html(userCity);
 		navigator.geolocation.getCurrentPosition(showPositionCity);
 	} else {
 		alert("Geolocation is not supported by this browser.");
