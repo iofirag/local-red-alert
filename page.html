@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    </head>
+    <body dir="rtl" onload="encoding();">
+        <script type="text/javascript">
+            var nIntervId;
+            function encoding() {
+                nIntervId = setInterval(ajax, 1000);
+            }
+            function ajax() {
+                $.ajax({
+                url: "http://redalert.eu5.org/ajax.php",
+                success: function (data) {
+                	debugger;
+                	var ob = JSON.parse(data);
+                    console.log(ob);
+                }
+            });
+            }
+        </script>
+        <div id="ajax"></div>
+    </body>
+</html>
